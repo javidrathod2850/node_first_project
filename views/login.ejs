@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<% include include/header.ejs  %>
+	</head>
+    <body>
+        <% include include/menu.ejs  %>
+        <section id="main" class="wrapper style1">
+            <div class="container">
+                <section>
+                    <h3>Login</h3>
+                    <form method="post" action="check-login">
+                        <div class="row uniform">
+                            <div class="6u 12u(3)">
+                                <input type="email" name="email" id="email" value="" placeholder="Email" />
+                            </div>
+                            <div class="6u 12u(3)">
+                                <input type="password" name="pwd" id="pwd" value="" placeholder="password" />    
+                            </div>
+                        </div>
+                        <div class="row uniform">
+                            <div class="12u">
+                                <ul class="actions">
+                                    <li><input type="submit" value="Login" /></li>
+                                    <li><input type="reset" value="Reset" class="alt" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+         </section>
+        <% include include/footer.ejs %>
+    </body>
+</html>
