@@ -16,5 +16,5 @@ app.engine('html', require('ejs').renderFile);
 // });
 
 var server     =    app.listen(3000,function(){
-    console.log("We have started our server on port 3000");
+    console.log("We have started our server on 3000 port");
 });
