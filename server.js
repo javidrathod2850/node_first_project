@@ -10,7 +10,6 @@ app.set('view engine', 'ejs');
 app.use(express.static('views'))
 app.engine('html', require('ejs').renderFile);
 
-
 //     app.get('/',function(req,res){
 //     res.sendfile('index.html');
 // });

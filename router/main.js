@@ -12,6 +12,9 @@ module.exports = function(app)
     app.get('/about',function(req,res){
         res.render('about.html');
     });
+    app.get('/portfolio',function(req,res){
+        res.render('portfolio.ejs');
+    });
     app.get('/register',function(req,res){
         res.render('register.ejs')
     });
@@ -47,6 +50,7 @@ module.exports = function(app)
           }
         });  
     });
+    
     app.post('/insertdata',function(req,res){
     var sql = "CREATE TABLE IF NOT EXISTS user(id INT NOT NULL AUTO_INCREMENT, email VARCHAR(255), password VARCHAR(255),country int(1),gender VARCHAR(10),address LONGTEXT, PRIMARY KEY (`id`))";  
     con.query(sql, function (err, result) {  
