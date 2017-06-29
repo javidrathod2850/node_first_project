@@ -45,6 +45,7 @@
 	</div>
 </footer>
 <!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
@@ -67,5 +68,17 @@
 		<i class="fa fa-chevron-up"></i>
 	</a>
 </div>
+<script>
+$(document).ready(function(){ alert()
+    var from,to,subject,text;
+    $("#send_email").click(function(){      
+        from=$("#email").val();
+        name=$("#name").val();
+        message=$("#message").val();
+        $.get("http://localhost:3000/send",{from:from,name:name,message:message},function(data){
+        });
+    });
+});
+</script>
 </body>
 </html>

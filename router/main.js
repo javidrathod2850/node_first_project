@@ -1,5 +1,15 @@
 const db= require("./db");
 var bodyParser =    require("body-parser");
+var nodemailer = require("nodemailer");
+var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    auth: {
+        user: "add mail",
+        pass: "password"
+    },
+    tls: true
+}); 
 module.exports = function(app)
 {
     var mysqlObj= new db();
@@ -52,20 +62,34 @@ module.exports = function(app)
     });
     
     app.post('/insertdata',function(req,res){
-    var sql = "CREATE TABLE IF NOT EXISTS user(id INT NOT NULL AUTO_INCREMENT, email VARCHAR(255), password VARCHAR(255),country int(1),gender VARCHAR(10),address LONGTEXT, PRIMARY KEY (`id`))";  
-    con.query(sql, function (err, result) {  
-      if (err) throw err;  
-    });  
-    var email=req.body.email;
-    var password=req.body.pwd;
-    var country=req.body.country;
-    var gender=req.body.gender;
-    var address=req.body.address;
-    var insertquery = "INSERT INTO user (email, password, country,gender,address) VALUES ('"+email+"','"+password+"','"+country+"','"+gender+"','"+address+"')";  
-        con.query(insertquery, function (err, result) {  
-            if (err) throw err;  
-            console.log("1 record inserted");  
+        var sql = "CREATE TABLE IF NOT EXISTS user(id INT NOT NULL AUTO_INCREMENT, email VARCHAR(255), password VARCHAR(255),country int(1),gender VARCHAR(10),address LONGTEXT, PRIMARY KEY (`id`))";  
+        con.query(sql, function (err, result) {  
+        if (err) throw err;  
         });  
-    res.redirect('/');
+        var email=req.body.email;
+        var password=req.body.pwd;
+        var country=req.body.country;
+        var gender=req.body.gender;
+        var address=req.body.address;
+        var insertquery = "INSERT INTO user (email, password, country,gender,address) VALUES ('"+email+"','"+password+"','"+country+"','"+gender+"','"+address+"')";  
+            con.query(insertquery, function (err, result) {  
+                if (err) throw err;  
+                console.log("1 record inserted");  
+            });  
+        res.redirect('/');
+    });
+    app.get('/send',function(req,res){
+        var mailOptions={
+            to : 'add email where you want to get mail',
+            subject : req.query.name,
+            text : req.query.message
+        }
+        smtpTransport.sendMail(mailOptions, function(error, response){
+            if(error){
+                res.end("error");
+            }else{
+                    res.end("sent");
+                }
+        });
     });
 }
